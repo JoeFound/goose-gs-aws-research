@@ -5,9 +5,11 @@
   "author": "GS Tech",
   "main": "pbx.js",
   "scripts": {
-    "start": "node pbx.js"
+    "start": "(coffee --compile --output dist --watch src &);node ./dist/pbx.js"
   },
   "dependencies": {
-    "horseman": "^0.2.1"
+    "debug": "^3.1.0",
+    "deferred": "^0.7.8",
+    "node-horseman": "^3.3.0"
   }
 }
