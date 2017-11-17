@@ -35,7 +35,7 @@ Resources:
       KeyName: ansible-ssh-key
       Tags:
           - Key: "Name"
-            Value: "ansible-test"
+            Value: "ec2-eu-central-1a-p-ansible"
           - Key: "Stack"
             Value: "Ansible"
           - Key: "Environment"
@@ -43,7 +43,12 @@ Resources:
   AnsibleSecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
+      GroupName: security-group-eu-central-1-p-ansible-ssh
       GroupDescription: Enable SSH access via port 22
+      Tags:
+          - Key: "Name"
+            Value:
+                !Ref GroupName
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '22'
@@ -55,22 +60,22 @@ Outputs:
   InstanceId:
     Description: InstanceId of the newly created EC2 instance
     Value:
-      Ref: EC2Instance
+      Ref: AnsibleInstance
   AZ:
     Description: Availability Zone of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - EC2Instance
+        - AnsibleInstance
         - AvailabilityZone
   PublicDNS:
     Description: Public DNSName of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - EC2Instance
+        - AnsibleInstance
         - PublicDnsName
   PublicIP:
     Description: Public IP address of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - EC2Instance
+        - AnsibleInstance
         - PublicIp
