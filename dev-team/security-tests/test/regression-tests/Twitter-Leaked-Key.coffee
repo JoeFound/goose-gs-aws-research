@@ -16,7 +16,7 @@ options =
 
 client = new Twitter(options)
 
-describe 'twitter api tests',->
+describe 'Twitter Leaked Key',->
   it 'Test Twitter API api creds', (done)->
     params = {screen_name: 'nodejs'};
     client.get 'statuses/user_timeline', params, (error, tweets, response)->

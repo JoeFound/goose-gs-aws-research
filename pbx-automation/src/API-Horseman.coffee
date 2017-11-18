@@ -1,4 +1,5 @@
 require 'fluentnode'
+Horseman = require('node-horseman');
 
 class API_Horseman
   constructor: ->
@@ -8,5 +9,6 @@ class API_Horseman
       'loadImages'     : false
       'ignoreSSLErrors': true
       'webSecurity'    : false
+    @._horseman = new Horseman(@.scrapConf);
 
 module.exports = API_Horseman

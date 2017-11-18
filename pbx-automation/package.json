@@ -6,7 +6,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": ""
+    "test": "node_modules/.bin/mocha  --require coffee-script/register --recursive test/**/*.coffee"
   },
   "repository": {
     "type": "git",
@@ -19,7 +19,12 @@
   },
   "homepage": "https://github.com/photobox/gs-aws-research#readme",
   "dependencies": {
+    "deferred": "^0.7.8",
     "fluentnode": "^0.7.1",
-    "node-horseman": "^3.3.0"
+    "node-horseman": "^3.3.0",
+    "phantomjs-prebuilt": "^2.1.16"
+  },
+  "devDependencies": {
+    "mocha": "^4.0.1"
   }
 }
