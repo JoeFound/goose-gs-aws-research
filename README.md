@@ -8,16 +8,43 @@ Project main tasks:
 - Install and configure an ELK stack that consumes all AWS events and logs stored in S3
 - Create a CI pipeline that starts vulnerable applications and web attacks tools aimed at those apps
 - set up AWS WAF to protect the vulnerable apps
+-- https://www.slideshare.net/AmazonWebServices/using-aws-waf-and-lambda-for-automatic-protection
 
-## photobox-automation
-### How to configure
+# Pre-requisites
+In order to run these automation playbooks and scripts the following is needed:
+
+- A Unix host(macOS or Linux)
+- Virtualenv / pyenv
+- Ansible
+- AWS CLI
+- Boto3
+
+## Download and install
 ```
-npm install
+# Download respository
+$ cd Projects; git clone https://github.com/photobox/gs-aws-research.git
+
+# Change directory
+$ cd gs-aws-research
+
+# Create new virtualenvironment with pyenv
+$ pyenv virtualenv 3.4.0 venv
+
+# Activate the virtual environment
+$ pyenv activate venv
+
+# Install requirements.txt
+$ pip install -r requirements.txt
 ```
 
-### How to run
+## Configure AWS CLI
+Run the `aws configure` command and enter your AWS Access Key ID and AWS Secret Access Key
 ```
-npm start
+$ aws configure
+$ AWS Access Key ID [****************7MKA]:
+AWS Secret Access Key [****************u1eV]:
+Default region name [eu-central-1]:
+Default output format [json]:
 ```
 
 
@@ -34,7 +61,6 @@ Elasticsearch will be used for consuming and visualising logs in the Environment
 Prometheus will be used for monitoring metrics in the enviroment
 
 - https://prometheus.io
-
 
 ## Ansible
 Ansible automation tool will be used for provisioning, configuration and orchestration of the whole AWS environment and components deployed in the environment.
@@ -53,6 +79,7 @@ The environment will be provisionesd with vulnerable web applications that will 
 
 - https://github.com/ethicalhack3r/DVWA
 - https://www.slideshare.net/AmazonWebServices/using-aws-waf-and-lambda-for-automatic-protection
+
 
 
 ## Naming Conventions
