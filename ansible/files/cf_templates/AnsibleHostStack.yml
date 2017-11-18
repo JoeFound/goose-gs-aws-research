@@ -47,8 +47,7 @@ Resources:
       GroupDescription: Enable SSH access via port 22
       Tags:
           - Key: "Name"
-            Value:
-                !Ref GroupName
+            Value: "security-group-eu-central-1-p-ansible-ssh"
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: '22'
