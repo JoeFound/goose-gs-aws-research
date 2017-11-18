@@ -33,6 +33,8 @@ Resources:
       AvailabilityZone: eu-central-1a
       InstanceType: t2.micro
       KeyName: ansible-ssh-key
+      SecurityGroups:
+        - Ref: AnsibleSecurityGroup
       Tags:
           - Key: "Name"
             Value: "ec2-eu-central-1a-p-ansible"

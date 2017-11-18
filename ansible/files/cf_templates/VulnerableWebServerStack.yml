@@ -26,55 +26,62 @@ Parameters:
     AllowedPattern: '(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})/(\d{1,2})'
     ConstraintDescription: must be a valid IP CIDR range of the form x.x.x.x/x.
 Resources:
-  AnsibleInstance:
+  DVWAInstance:
     Type: "AWS::EC2::Instance"
     Properties:
       ImageId: "ami-b52babda"
       AvailabilityZone: eu-central-1a
       InstanceType: t2.micro
       KeyName: ansible-ssh-key
+      SecurityGroups:
+        - Ref: DVWASecurityGroup
       Tags:
           - Key: "Name"
-            Value: "ec2-eu-central-1a-p-ansible"
+            Value: "ec2-eu-central-1a-p-dvwa"
           - Key: "Stack"
-            Value: "Ansible"
+            Value: "DVWA"
           - Key: "Environment"
             Value: "Test"
-  AnsibleSecurityGroup:
+  DVWASecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
-      GroupName: security-group-eu-central-1-p-ansible-ssh
+      GroupName: security-group-eu-central-1-p-dvwa-http
       GroupDescription: Enable SSH access via port 22
       Tags:
           - Key: "Name"
-            Value: "security-group-eu-central-1-p-ansible-ssh"
+            Value: "security-group-eu-central-1-p-dvwa-http"
       SecurityGroupIngress:
         - IpProtocol: tcp
-          FromPort: '22'
-          ToPort: '22'
+          FromPort: '80'
+          ToPort: '80'
           CidrIp:
             Ref: SSHLocation
+        - IpProtocol: tcp
+          FromPort: '443'
+          ToPort: '443'
+          CidrIp:
+               Ref: SSHLocation
 
 Outputs:
   InstanceId:
     Description: InstanceId of the newly created EC2 instance
     Value:
-      Ref: AnsibleInstance
+      Ref: DVWAInstance
   AZ:
     Description: Availability Zone of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - AnsibleInstance
+        - DVWAInstance
         - AvailabilityZone
   PublicDNS:
     Description: Public DNSName of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - AnsibleInstance
+        - DVWAInstance
         - PublicDnsName
   PublicIP:
     Description: Public IP address of the newly created EC2 instance
     Value:
       'Fn::GetAtt':
-        - AnsibleInstance
+        - DVWAInstance
         - PublicIp
