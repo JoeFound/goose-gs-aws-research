@@ -9,6 +9,17 @@ Project main tasks:
 - Create a CI pipeline that starts vulnerable applications and web attacks tools aimed at those apps
 - set up AWS WAF to protect the vulnerable apps
 
+## photobox-automation
+### How to configure
+```
+npm install
+```
+
+### How to run
+```
+npm start
+```
+
 
 # Tools
 The following tools and technologies will be used in the environment.
@@ -24,11 +35,6 @@ Prometheus will be used for monitoring metrics in the enviroment
 
 - https://prometheus.io
 
-## photobox-automation
-# How to configure
-npm install
-# How to run
-npm start
 
 ## Ansible
 Ansible automation tool will be used for provisioning, configuration and orchestration of the whole AWS environment and components deployed in the environment.
