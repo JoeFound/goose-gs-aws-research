@@ -24,6 +24,12 @@ Prometheus will be used for monitoring metrics in the enviroment
 
 - https://prometheus.io
 
+## photobox-automation
+# How to configure
+npm install
+# How to run
+npm start
+
 ## Ansible
 Ansible automation tool will be used for provisioning, configuration and orchestration of the whole AWS environment and components deployed in the environment.
 
