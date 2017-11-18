@@ -8,7 +8,7 @@ Project main tasks:
 - Install and configure an ELK stack that consumes all AWS events and logs stored in S3
 - Create a CI pipeline that starts vulnerable applications and web attacks tools aimed at those apps
 - set up AWS WAF to protect the vulnerable apps
--- https://www.slideshare.net/AmazonWebServices/using-aws-waf-and-lambda-for-automatic-protection
+
 
 # Tools
 The following tools and technologies will be used in the environment.
@@ -34,6 +34,13 @@ Ansible automation tool will be used for provisioning, configuration and orchest
 Cloud-custodian will be used for house-keeping tasks in the AWS environment. Cleaning and destroying old EC2 instances, ensuring security and compliance AWS configurations end setups.
 
 - https://developer.capitalone.com/opensource-projects/cloud-custodian/
+
+
+## Damn Vulnerable Web Application
+The environment will be provisionesd with vulnerable web applications that will be protected and monitored by Amazon WAF and logs visualised by ELK from AWS logs storewd in S3 buckets. The logs will be consumed and analysed and AWS Lambda used to update WAF configurations based on the attacks detected in the logs.
+
+- https://github.com/ethicalhack3r/DVWA
+- https://www.slideshare.net/AmazonWebServices/using-aws-waf-and-lambda-for-automatic-protection
 
 
 ## Naming Conventions
