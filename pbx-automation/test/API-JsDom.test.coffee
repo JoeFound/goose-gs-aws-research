@@ -41,4 +41,46 @@ describe.only 'API-JsDom',->
       window.window.FLEXI.utils.mobileBreakpoint.assert_Is 1024
       done()
 
+  it 'login (bad account)' , (done)->
+    username = 'aaaa'
+    password = 'bbb'
+    api_JsDom.open 'https://www.photobox.co.uk', ($, window)->
+      $('input#j_username').val(username)                                  # set username
+      $('input#j_password').val(password)                                  # set password
+
+
+      $('#loginForm .error').eq(0).attr('class').assert_Is 'error hidden'  # confirm error message is not shown
+
+      $('#loginForm button#submit').click()                                # click on Sign in Button
+
+      $('#loginForm .error').eq(0).attr('class').assert_Is 'error'
+
+      done()
+
+  @.timeout 10000
+  it.only 'login (good account)' , (done)->
+
+    first_Name = 'Waqas'
+    username   = 'waqasajazch@gmail.com'
+    password   = '12345678'
+
+
+    api_JsDom.open 'https://www.photobox.co.uk', ($, window)->
+      $('input#j_username').val(username)                                      # set username
+      $('input#j_password').val(password)                                      # set password
+
+
+      $('#loginForm .error').eq(0).attr('class')     .assert_Is 'error hidden' # confirm error message is not shown
+      $('.site-nav__link--userAccount').text().trim().assert_Is 'My Photobox'  # confirm title is default value
+      $('#loginForm button#submit').click()                                    # click on Sign in Button
+
+      # the click is throwing this handled error
+      #      (node:23541) UnhandledPromiseRejectionWarning: Unhandled promise rejection (rejection id: 1): ReferenceError: ga_trackEvent is not defined
+      #      (node:23541) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
+
+      1000.wait ->                                                              # wait 1 second before reloading the page (500ms doesn't seem to be enough). We need to find a better way than this blind 1 sec wait
+        api_JsDom.open 'https://www.photobox.co.uk', ($, window)->              # reload page
+          $('.site-nav__link--userAccount').text().trim().assert_Is first_Name  # confirm login
+  
+          done()
 

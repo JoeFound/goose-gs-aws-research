@@ -1,20 +1,23 @@
 require 'fluentnode'
 
-jsdom  = require("jsdom/lib/old-api.js");
+jsdom     = require("jsdom/lib/old-api.js");
+
 
 class API_JsDom
   constructor: ->
     @.features =
       FetchExternalResources  : ["script"]
       ProcessExternalResources: ["script"]
+    @.cookieJar = jsdom.createCookieJar()
 
   open: (url,callback)=>
     config =
-      url: url
+      url      : url
       features : @.features
-      created: ()=> @.on_Created?()
-      onload : ()=> @.on_Load?()
-      done   : (err, window)=>
+      cookieJar: @.cookieJar
+      created  : ()=> @.on_Created?()
+      onload   : ()=> @.on_Load?()
+      done     : (err, window)=>
         throw err if err
         @.window = window
         @.$      = window.$
